@@ -8,6 +8,10 @@ import os,datetime
 
 location = 'gs://earthenginepartners-hansen/GLADalert/%d'%datetime.datetime.now().year
 
-files = os.popen('gsutil ls %s'%location).read().split()
+days = os.popen('gsutil ls %s'%location).read().split()
+
+
+files =  os.popen('gsutil ls %s'%days[-1]).read().split()
+
 
 print files
