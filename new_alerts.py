@@ -5,8 +5,8 @@ Must have gsutil installed (pip install gsutil)
 '''
 import os,datetime
 
-
-location = 'gs://earthenginepartners-hansen/GLADalert/%d'%datetime.datetime.now().year
+bucket = 'earthenginepartners-hansen'
+location = 'gs://%s/GLADalert/%d'%(bucket,datetime.datetime.now().year)
 
 days = os.popen('gsutil ls %s'%location).read().split()
 
