@@ -1,0 +1,7 @@
+*.shp
+*.dbf
+*.prj
+*.shx
+/shapefiles/*
+*.tiff
+*.geojson
