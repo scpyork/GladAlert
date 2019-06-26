@@ -1,7 +1,7 @@
 # GladAlert
 Reporcess the glad alert data to match the TRASE shapefiles.
 
-### Insatll
+### Install
 `pip install gsutil`
 `pip install pillow`
 `pip install geopandas`
