@@ -5,3 +5,5 @@
 /shapefiles/*
 *.tiff
 *.geojson
+*.h5
+.nfs*
