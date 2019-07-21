@@ -1,10 +1,17 @@
 # GladAlert
 Reporcess the glad alert data to match the TRASE shapefiles.
 
-### Insatll
-`pip install gsutil;`
-`pip install pillow;`
-`pip install geopandas;`
+
+
+
+
+
+
+### Install
+`pip install gsutil`
+`pip install pillow`
+`pip install geopandas`
+
 
 ### Setting up the shapefiles
 These can be at any location, although the processed files remain within that directory.
