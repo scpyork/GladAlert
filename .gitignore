@@ -7,3 +7,5 @@
 *.geojson
 *.h5
 .nfs*
+*.bak
+webtest/node_modules/

@@ -6,6 +6,15 @@ Must have gsutil installed (pip install gsutil)
 import os
 
 
+def gettif(year):
+
+    __bucket__ = 'earthenginepartners-hansen'
+    __location__ = 'gs://%s/GLADalert/%d'%(__bucket__,year)
+
+    return os.popen('gsutil ls -d %s/*/alert%s_*'%(__location__,str(year)[-2:])).read().split()
+
+
+
 
 def getdates(year,par=False):
     ''' Use gsutil to read files for a specific year'''
@@ -28,7 +37,7 @@ def getdates(year,par=False):
         dates = pool.imap(pl,dates)
 
     else:
-        [os.popen('gsutil ls %s'%i).read().split() for i in dates]
+        (os.popen('gsutil ls %s'%i).read().split() for i in dates)
 
 
     for i in dates:

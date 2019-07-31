@@ -18,7 +18,7 @@ plot = True
 if not os.path.isdir(loc+'/masks'):os.mkdir(loc+'/masks')
 
 
-hf      = h5py.File('glad_data.h5','r')
+hf      = h5py.File('glad_shapes.h5','r')
 box = [np.array(i.split('|')).astype(int) for i in hf.keys()]
 
 

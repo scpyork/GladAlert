@@ -11,7 +11,8 @@ import geopandas as gpd
 
 
 loc = './shapefiles'
-files = glob.glob(loc+'/*/*.shp')
+files = glob.glob(loc+'/G*/*.shp')
+print (files)
 
 #create the processed directory
 if not os.path.isdir(loc+'/processed'):os.mkdir(loc+'/processed')

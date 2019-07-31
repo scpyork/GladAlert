@@ -13,6 +13,20 @@ Reporcess the glad alert data to match the TRASE shapefiles.
 `pip install geopandas`
 
 
+### Order of running
+1. Download shapefiles and convert into geojson (stored under a `shapefiles` directory)
+2. Save region polynomials into `glad_shapes.h5`
+3. Download the latest data into `glad_data_<year>.h5`
+
+
+### example code for accomplishing above.
+```
+
+
+```
+
+
+
 ### Setting up the shapefiles
 These can be at any location, although the processed files remain within that directory.
 
