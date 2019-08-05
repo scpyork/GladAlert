@@ -35,4 +35,17 @@ Reference multispectral imagery from the most recent cloud-free observation enco
 ### Day of year of the most recent observation (obsDate)
 Day of year of the most recent cloud-free observation within the 2019 encoded in unsigned 16-bit values. Zero values indicate there has not yet been a cloud-free observation this year.
 
+## Downloading of the data
+Although it is possible to scrape the data directly from the downloads page, ultimately this is provided through the public bucket `earthenginepartners-hansen` on the google cloud servers. 
+
+### Access
+The easiest way to access this is through the gsutil comand line application which can be installed through a variety ways including the pypy repository. To use this replace the `https` of our desired file link e.g. `https://storage.cloud.google.com/earthenginepartners-hansen/GLADalert/2019/08_04/alert19_060W_10S_050W_00N.tif` with `gs`, and then we may use gsutils copy function as such:
+
+` gsutil cp gs://<fileurl> <location to place file>`
+
+### Determining what is available
+It is also possible to determine what files are available in a sub repository with gsutils list function. Wildcard matching of filenames may also be used here e.g. 
+`gsutil ls -d gs://storage.cloud.google.com/earthenginepartners-hansen/GLADalert/2019/*/alert18_*'
+
+
 
