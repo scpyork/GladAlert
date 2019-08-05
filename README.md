@@ -78,6 +78,12 @@ Note, if a test filter is used currently if a date exists, it will be skipped wh
 If the GLADalertTRASE library is imported, it currently has a view function for exploring the data file structure contained within it. 
 
 ## Shapefiles
+`python GLADalertTRASE/shp2geo.py`
+Shapefiles are oridinary gis shapefiles downloaded from the TRASE s3 bucket (or wherever is desired). These should be placedd in the `shapefiles` repository under their corresponding country name e.g. brazil. 
+
+Once thi has been done, you can run the above code to generate the required geoJSON files in the `shapefiles/processed` directory. 
+
+## Finding matches
 
 
 
