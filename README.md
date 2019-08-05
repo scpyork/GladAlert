@@ -39,3 +39,8 @@ Processed files are then read, and turned into masks fitting the GLAD alert tile
 
 ## Todo
 write properties files
+
+
+##Cite
+
+Hansen, Matthew C., Alexander Krylov, Alexandra Tyukavina, Peter V. Potapov, Svetlana Turubanova, Bryan Zutta, Suspense Ifo, Belinda Margono, Fred Stolle, and Rebecca Moore. “Humid Tropical Forest Disturbance Alerts Using Landsat Data.” Environmental Research Letters 11, no. 3 (2016): 034008. https://doi.org/10.1088/1748-9326/11/3/034008.

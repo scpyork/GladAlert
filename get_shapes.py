@@ -14,7 +14,7 @@ year = 2019
 
 __location__ = './shapefiles'
 __files__ = filter(lambda x: 'Global' not in x, glob.glob(__location__+'/processed/*.geojson'))
-__alertFile__ = h5py.File('data/glad_data_%s.bak'%year,'r')
+__alertFile__ = h5py.File('data/glad_data_%s.h5'%year,'r')
 
 # use false otherwise state matches
 __testRegion__ = u'Formosa do Rio Preto,Nova Ubiratã'.split(',')#False
@@ -173,6 +173,8 @@ for this in __files__: # __files__ are all processed geojson __files__ from inpu
         # ### write the results of store to json file.
         ### Filter out muncipalities with no alerts (ever) - these contain no new information.
         vals = filter(lambda x: store[x]['alerts']!={},store)
+
+        print(len(val),'values')
         with open('data/%s_results.json'%country, 'w') as file:
             file.write(json.dumps(dict(zip(vals,[store[i] for i in vals]))))
 
