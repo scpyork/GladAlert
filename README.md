@@ -46,6 +46,14 @@ The easiest way to access this is through the gsutil comand line application whi
 It is also possible to determine what files are available in a sub repository with gsutils list function. Wildcard matching of filenames may also be used here e.g. 
 `gsutil ls -d gs://storage.cloud.google.com/earthenginepartners-hansen/GLADalert/2019/*/alert18_*`
 
+# The Code
+Although not finished, this will ultimately form a python library containing automated documentation. This (README.md) is a report and overview of the different functionalities of the code. 
+
+## Exctracting the dataset 
+`python -m GLADalertTRASE.update_data`
+
+
+
 
 
 
