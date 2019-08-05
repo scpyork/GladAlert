@@ -9,7 +9,9 @@ http://glad-forest-alert.appspot.com/
 
 The dataset presented tries to emulate near real-time forest loss using LANSAT satelite imagery. The earth is divided into rectangular tiles of differing sizes representing different regions of the world.  "South America and South East Asia tiles have dimensions of 10°x10°. Central Africa tiles have dimensions of 14°x14°. Far eastern Russia is a single image with dimensions of 12°x11°".
 
-<img src='Documentation/cells.png' width=50%> An example test plot of tile shapes (countries not to scale)</img> 
+<img src='Documentation/cells.png' width=50% /> 
+
+An example test plot of tile shapes (countries not to scale)
 
 ### Resolution and Index
 Tiles are represented as Tagged Image Format files (tiff) and have a spatial resolution of 0.00025° per pixel, this equates to ~ 28 metres at the equator. Their correspoding date, left bottom and right top coordinates are provided within the filename - `GLADalert_2019_08_04_obsDate_060W_10S_050W_00N.tif`.
