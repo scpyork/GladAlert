@@ -1,9 +1,9 @@
-# GLAD alert TRASE 
+# GLADalertTRASE 
 
 A script or python library to download glad alerts and calculate them for each muncipality based on the shape files provided by trase. This script will need to be run periodically as a cron job in order to be kept up to date with current alerts. 
 
 
-## What are glad alerts
+## What are glad alerts?
 http://glad-forest-alert.appspot.com/
 
 The dataset presented tries to emulate near real-time forest loss using LANSAT satelite imagery. The earth is divided into rectangular tiles of differing sizes representing different regions of the world.  "South America and South East Asia tiles have dimensions of 10°x10°. Central Africa tiles have dimensions of 14°x14°. Far eastern Russia is a single image with dimensions of 12°x11°".
@@ -52,6 +52,32 @@ Although not finished, this will ultimately form a python library containing aut
 ## Exctracting the dataset 
 `python -m GLADalertTRASE.update_data`
 
+
+* ### Parallelism
+Within the glad dataset there exist 115 separate files, all containing ~ 40,000 pixels each. With 365 days in a year, this soon amounts to a very slow and tedious process in reading and extracting information about them. To overcome this each days worth of tiles is processed in parallel using an MPI initiated through the python command above. An instance of mpi and the mpi4py libraries need to be installed prior to running this. This still takes a couple of hours to complete a month provided all the data is available. 
+
+* ### TestRegions
+Test regions may be supplied in the files to save having to re-compute/download everything each time in the development stage. These are located in `GLADalertTRASE/update_data/__main__.py` for locations (`__testRegion__`). 
+
+* ### Image processing
+The code for this is found within `GLADalertTRASE/update_data/functions.py`. Initially this was done by storing the contents for each file as a matrix within in a single binary file for each year, however in trying to record 41975 tiles, the output was tens of gigabytes, which was highly impractical. 
+
+It was noted that the alert data was highly sparse in form, with some tiles containing <10 alterts out of their 40,000^2 pixels. It is for this reason that the sparse cooordinate matrix design was chosen. Here we convert the pixel indexes to represent the fraction of Latitude and Longitude that they correspond to and record this in as a 3 column dataframe [Lat, Lon, AlertIndex] , which we save to disk. 
+
+ * ### File storage
+ Alert data is stored as a Hierarchical Data Format (hdf5) file under `./data/glad_data.h5`. It was decided that a separate file for each year may be preferable. These require the h5py library to be installed. The containing file format is as shown:
+ 
+ * created_on
+ * groups in fomat [MM_YY] from the original data
+    * urls - downloaded urls within that month/day combination
+    * time - duration taken to download everything (useful for performance analysis)
+    * data (dataset): [Lat, Lon, AlertIndex]
+ 
+Note, if a test filter is used currently if a date exists, it will be skipped when trying to determine future downloads - you need to delete this to add more data (or add further checks - todo)
+
+If the GLADalertTRASE library is imported, it currently has a view function for exploring the data file structure contained within it. 
+
+## Shapefiles
 
 
 
