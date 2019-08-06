@@ -21,6 +21,9 @@ Within a file, the status of an area is given by the value encoded within its re
 - `2`  Probable Loss - A single observation flagged as a loss, if this does result in a confirmed loss, it reverts back to 0. 
 - `3` A confimed loss is produced by repeat observations in 180 days (or 4 consequtive observations). 
 
+#### NOTE - tiles vary in location between years!
+
+
 ## Available files
 * ### Forest Loss Alert (alert)
 Alert information for days with the above encodings. 
