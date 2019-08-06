@@ -11,3 +11,4 @@
 webtest/node_modules/
 temp*
 test*
+data/*.json
