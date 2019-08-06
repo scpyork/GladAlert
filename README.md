@@ -119,7 +119,7 @@ Each line plot may contain a combination of lines including confirmed and possib
 ### A muncipality alert locator
 An overview of the muncipality, and where each alert appears. This could potentially be animated over time and consists of contours of all(confirmed and possible) alerts, faint possible alert points and TRASE pink confirmed alerts.
 
-<img src='Documentation/alertcounrty.png' width=95% />
+<img src='Documentation/alertcountry.png' width=95% />
 
 
 
