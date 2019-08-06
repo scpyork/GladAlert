@@ -57,7 +57,7 @@ Since each tile is too large to be plotted normally, that and many of the encodi
 
 The described script resixes the image into a 10000x10000 grid, and can plot it using the default pillow image viewer (imagemagick) or matplotlib. An example test plot showing the alerts within a tile is provided below. Here points represent alert, with the larger 'steelblue' circles representing confirmed alerts. 
 
-<img src='Documentation/gladtest.png' width=60% />
+<img src='Documentation/gladtest.png' width=80% />
 
 # The Code
 Although not finished, this will ultimately form a python library containing automated documentation. This (README.md) is a report and overview of the different functionalities of the code. 
