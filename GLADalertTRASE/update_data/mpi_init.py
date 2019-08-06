@@ -93,9 +93,28 @@ filtered = comm.gather(filtered,root=0)
 comm.barrier()
 if rank == 0:
     print ('writing to file (slow)')
+
+
     data = np.concatenate(filtered,axis=1)
-    data.sort( axis = 1)
-    print data[:,:30]
+
+    #we need a row preserving sort
+    data = data[np.argsort(data[:,1])]
+    data = data[np.argsort(data[:,0])]
+
+    #test the sorting problem
+    '''
+    import pandas as pd
+    pd.DataFrame(data).to_csv('test.csv')
+    print 'csv'
+    '''
+
+    '''
+    f = tuple(open('test.csv'))
+    plt.scatter(np.array(f[1].split(',')).astype(float),np.array(f[2].split(',')).astype(float))
+    '''
+
+    print max(data[0,:]), max(data[1,:]), max(data[2,:]),'\n', min(data[0,:]), min(data[1,:]),'\n',data[:,::50]
+
     with h5py.File('data/glad_data_%s.h5'%year,'a') as hf:
         try:      hf.attrs['created_on']
         except:   hf.attrs['created_on'] = str(now)
@@ -109,7 +128,7 @@ if rank == 0:
         try: del group['data']
         except: None
 
-        group.create_dataset('data', data.shape , dtype='float32', data = data,compression='gzip',compression_opts=9)
+        group.create_dataset('data', data.shape , data = data,dtype=float,compression='gzip',compression_opts=9)
 
 
     try: hf.close()

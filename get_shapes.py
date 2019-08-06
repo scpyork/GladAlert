@@ -6,6 +6,7 @@ import json,glob,re,os,h5py,itertools
 import numpy as np
 from numba import jit
 
+#import matplotlib.pyplot as plt
 
 ### Input variables
 
@@ -63,14 +64,21 @@ world = world.bounds
 #world.to_file("data/merged_countries.geojson", driver='GeoJSON')
 #world.plot()
 
+'''
+items like fronts from https://www.globalforestwatch.org/embed/dashboards/country/BRA/5/136?gladAlerts=eyJsYXRlc3REYXRlIjoiMjAxOS0wNy0yOSJ9&trase=true&widget=gladAlerts
 
+
+https://production-api.globalforestwatch.org/query/efaf9e27-a9bd-4b94-b489-c562b4b4d085?sql=SELECT%20iso,%20adm1,%20adm2,%20week,%20year,%20alerts%20as%20count,%20area_ha,%20polyname%20FROM%20data%20WHERE%20iso%20=%20%27BRA%27%20AND%20adm1%20=%205%20AND%20adm2%20=%20136%20AND%20polyname%20=%20%27admin%27
+
+
+'''
 
 
 #############
 ## Main code
 #############
 
-for this in __files__: # __files__ are all processed geojson __files__ from inputs.
+for this in __files__: # __files__ are all procecpoussed geojson __files__ from inputs.
 
     ## get current country name
     country = re.findall(r'/([^/_]+)_[^/]+\.geojson',this)[0]
@@ -83,9 +91,8 @@ for this in __files__: # __files__ are all processed geojson __files__ from inpu
 
 
 
+
     store = {} # information we wish to save
-
-
     with open(this,'r') as f:
 
         jsn = json.loads(f.read())#['features']
@@ -93,15 +100,17 @@ for this in __files__: # __files__ are all processed geojson __files__ from inpu
 
         # iterate through every date.
         for date in __alertFile__.keys():
+
             data = __alertFile__[date]['data']
             print (date)
+
 
             ### Only selelect data which falls within the bounding box area
 
             cslice = data[:,np.searchsorted(data[0],bounds.minx,side='left') :
                            np.searchsorted(data[0],bounds.maxx,side='right')+1]
-            cslice = cslice[:,np.searchsorted(cslice[1],bounds.miny,side='left') :
-                           np.searchsorted(cslice[1],bounds.maxy,side='right')+1]
+            #cslice = cslice[:,np.searchsorted(cslice[1],bounds.miny,side='left') :
+                          # np.searchsorted(cslice[1],bounds.maxy,side='right')+1]
 
             ### Select regions within the chosen country
 
@@ -110,6 +119,7 @@ for this in __files__: # __files__ are all processed geojson __files__ from inpu
 
 
                 #  [i['properties']['NAME'] for i in jsn['features']]
+
 
 
                 ### Get area name
@@ -139,14 +149,20 @@ for this in __files__: # __files__ are all processed geojson __files__ from inpu
                 x = poly[:,0] #lat
                 y = poly[:,1] #lon
 
+
+
+
+
                 xm = x.min()
                 xx = x.max()
                 ym = y.min()
                 yx = y.max()
 
+                print area, xm,xx, ym,yx
+
 
                 try: store[region] # if it exists
-                except: store[area] = {'name':region['properties']['NAME'],'properties':properties[area],'alerts':{},'polygon':poly.tolist()}
+                except: store[area] = {'name':region['properties']['NAME'],'properties':properties[area],'alerts':{},'potential':{},'polygon':poly.tolist()}
 
 
 
@@ -154,19 +170,26 @@ for this in __files__: # __files__ are all processed geojson __files__ from inpu
                                np.searchsorted(cslice[0],xx,side='right')+1]
 
                 sliced = slice[:,np.where(slice[1]>=ym)][:,0,:]
+
+                #sliced = slice[:,np.searchsorted(slice[1],ym,side='left') :
+                    #           np.searchsorted(slice[1],yx,side='right')+1]
+
+
+
                 sliced = sliced[:,np.where(sliced[1]<=yx)][:,0,:].astype(float)
 
-                print cslice.shape, slice.shape
+                print 'shp', cslice.shape, slice.shape,sliced.shape
 
                 if sliced.shape[1]>0:
 
                     res = np.array([z for z in sliced.T if ray_tracing(z[0],z[1],poly)])
 
                     if len(res) > 0 :
-                            print ym, yx , data[1].min(),data[1].max(),area
+                            print 'match', ym, yx , data[1].min(),data[1].max(),area
                             print slice.shape,sliced.shape,res.shape,area,res[:,2].sum(),sum(res[:,2]==2),sum(res[:,2]==3),'\n', properties[area]
 
-                            store[area]['alerts'][date] = res.tolist()
+                            store[area]['potential'][date] = res[res[:,2]==2].tolist()
+                            store[area]['alerts'][date] = res[res[:,2]==3].tolist()
 
 
 
@@ -174,7 +197,7 @@ for this in __files__: # __files__ are all processed geojson __files__ from inpu
         ### Filter out muncipalities with no alerts (ever) - these contain no new information.
         vals = filter(lambda x: store[x]['alerts']!={},store)
 
-        print(len(val),'values')
+        print(len(vals),'values')
         with open('data/%s_results.json'%country, 'w') as file:
             file.write(json.dumps(dict(zip(vals,[store[i] for i in vals]))))
 

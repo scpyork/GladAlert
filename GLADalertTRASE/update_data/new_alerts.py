@@ -11,7 +11,7 @@ def gettif(year):
     __bucket__ = 'earthenginepartners-hansen'
     __location__ = 'gs://%s/GLADalert/%d'%(__bucket__,year)
 
-    return os.popen('gsutil ls -d %s/*/alertDate%s_*'%(__location__,str(year)[-2:])).read().split()
+    return os.popen('gsutil ls -d %s/*/alert%s_*'%(__location__,str(year)[-2:])).read().split()
 
 
 

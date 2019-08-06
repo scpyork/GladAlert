@@ -14,6 +14,7 @@ def download(keep,tempdir):
     area = re.findall(r'_(\d+[NESW\b])',name)
     # current file position
     position = map(direction, area)
+    #print position
     group = '|'.join((str(i) for i in position))
 
     date = keep.split('/')[-2]
@@ -21,8 +22,14 @@ def download(keep,tempdir):
 #2
 
     ##  copy /  download the files into the temp directory
+
     (os.popen('gsutil cp %s %s/%s >/dev/null 2>&1 && echo "Copied: %s" >> temp.log'%(keep,tempdir,name,keep))) #.read())
+
+    #print (os.popen('gsutil cp %s %s/%s'%(keep,tempdir,name)).read(), 'gsutil cp %s %s/%s'%(keep,tempdir,name))
+
+
     ## Read image pixels using pillow library
+    # >/dev/null 2>&1 && echo "Copied: %s" >> temp.log'
     im = Image.open('%s/%s'%(tempdir,name))
     ## Image pixels to a sparse array
     data = sparse.coo_matrix(im,int)
@@ -31,9 +38,9 @@ def download(keep,tempdir):
 
 
     data = np.array([
-        data.row.astype(float)* 0.00025 + position[0] ,
+        data.row.astype(float)* 0.00025 + float(position[0]) ,
         #/float(data.shape[0])*(float(position[2]-position[0]))+position[0],
-        data.col.astype(float)* 0.00025 + position[1] ,
+        data.col.astype(float)* 0.00025 + float(position[1]) ,
         #/float(data.shape[1])*(float(position[3]-position[1]))+position[1],
         data.data
     ])
