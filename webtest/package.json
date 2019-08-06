@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Electon test",
   "main": "main.js",
-  "dependencies": {},
+  "dependencies": {
+    "d3-contour": "^1.3.2"
+  },
   "devDependencies": {
     "electron": "^1.4.0",
     "electron-reload": "^1.2.0",
