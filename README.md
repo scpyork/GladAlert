@@ -1,4 +1,7 @@
-# GLADalertTRASE
+
+# GLADalertTRASE          
+<img src='https://zenodo.org/badge/DOI/10.5281/zenodo.3361830.svg' />
+
 
 A script or python library to download glad alerts and calculate them for each muncipality based on the shape files provided by trase. This script will need to be run periodically as a cron job in order to be kept up to date with current alerts.
 
@@ -57,7 +60,7 @@ Since each tile is too large to be plotted normally, that and many of the encodi
 
 The described script resixes the image into a 10000x10000 grid, and can plot it using the default pillow image viewer (imagemagick) or matplotlib. An example test plot showing the alerts within a tile is provided below. Here points represent alert, with the larger 'steelblue' circles representing confirmed alerts.
 
-<img src='Documentation/gladtest.png' width=80% />
+<img src='Documentation/gladtest.png' width=70% />
 
 # The Code
 Although not finished, this will ultimately form a python library containing automated documentation. This (README.md) is a report and overview of the different functionalities of the code.
@@ -119,7 +122,7 @@ Each line plot may contain a combination of lines including confirmed and possib
 ### A muncipality alert locator
 An overview of the muncipality, and where each alert appears. This could potentially be animated over time and consists of contours of all(confirmed and possible) alerts, faint possible alert points and TRASE pink confirmed alerts.
 
-<img src='Documentation/alertcountry.png' width=95% />
+<img src='Documentation/alertcountry.png' width=85% />
 
 
 
@@ -127,7 +130,7 @@ An overview of the muncipality, and where each alert appears. This could potenti
 If using this codebase please cite the following:
 
 ### The codebase:
-(Add zemundo id)
+Dan Ellis. (2019, August 6). scpyork/GladAlert: MIOMBO (Version v1.0). Zenodo. http://doi.org/10.5281/zenodo.3361830
 
 
 ### The data:
