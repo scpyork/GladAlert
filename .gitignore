@@ -9,3 +9,5 @@
 .nfs*
 *.bak
 webtest/node_modules/
+temp*
+test*
