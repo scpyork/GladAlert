@@ -35,6 +35,8 @@ Reference multispectral imagery from the most recent cloud-free observation enco
 Day of year of the most recent cloud-free observation within the 2019 encoded in unsigned 16-bit values. Zero values indicate there has not yet been a cloud-free observation this year.
 
 ## Downloading of the data
+A link to browse all available files using the online browser (using the google stroage browser console): https://console.cloud.google.com/storage/browser/earthenginepartners-hansen/GLADalert
+
 Although it is possible to scrape the data directly from the downloads page, ultimately this is provided through the public bucket `earthenginepartners-hansen` on the google cloud servers. 
 
 * ### Access
