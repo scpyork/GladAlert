@@ -51,6 +51,14 @@ The easiest way to access this is through the gsutil comand line application whi
 It is also possible to determine what files are available in a sub repository with gsutils list function. Wildcard matching of filenames may also be used here e.g. 
 `gsutil ls -d gs://storage.cloud.google.com/earthenginepartners-hansen/GLADalert/2019/*/alert18_*`
 
+## Testing the tiles
+`python -m GLADalertTRASE.test_tile <your tile filename>.tif`
+Since each tile is too large to be plotted normally, that and many of the encodings cause problems with other programs, it makes sense to open it programatically. This can be done using the test script above. 
+
+The described script resixes the image into a 10000x10000 grid, and can plot it using the default pillow image viewer (imagemagick) or matplotlib. An example test plot showing the alerts within a tile is provided below. Here points represent alert, with the larger 'steelblue' circles representing confirmed alerts. 
+
+<img src='Documentation/gladtest.png' width=60% />
+
 # The Code
 Although not finished, this will ultimately form a python library containing automated documentation. This (README.md) is a report and overview of the different functionalities of the code. 
 
