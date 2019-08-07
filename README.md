@@ -1,6 +1,6 @@
 
 # GLADalertTRASE          
-<img src='https://zenodo.org/badge/DOI/10.5281/zenodo.3361830.svg' />
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3361830.svg)](https://doi.org/10.5281/zenodo.3361830)
 
 
 A script or python library to download glad alerts and calculate them for each muncipality based on the shape files provided by trase. This script will need to be run periodically as a cron job in order to be kept up to date with current alerts.
