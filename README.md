@@ -104,7 +104,7 @@ Once this has been done, you can run the above code to generate the required geo
 ## Finding matches
 `python -m GLADalertTRASE.update_data`
 
-Since many of the tiles are sparse, it was found to be more space efficient to store alerts in a sparse coordinate matrix. Such a method allows the loading of all global alerts for a single day as a single dataset. In ordering the longitudal and latitudal coordinates, we are able to easily filter data by selecting the smallest boundary match on the left (and the highest on the right), for each respective coordinate axis.
+Since many of the tiles are sparse, with some only containing a handful of alerts, it was found to be more space efficient to store alerts in a sparse coordinate matrix. Such a method allows the loading of all global alerts for a single day as a single dataset. In ordering the longitudal and latitudal coordinates, we are able to easily filter data by selecting the smallest boundary match on the left (and the highest on the right), for each respective coordinate axis.
 
 As a method to reduce computation time, we iteratively filter the data using progressively more and more specific boundaries. Firstly a subset is extracted to represent the country we are interested in. Next the max/min bounaries each respective region of interest for that country is selected. Finally all remaining points are fed through a pre-compiled function (using numba) to determine whether they fall within the polygon shape-file of the region.
 
